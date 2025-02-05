@@ -1,0 +1,43 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout Repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js with caching
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: "npm"
+
+      # Step 3: Install Dependencies (cached for faster builds)
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run ESLint (code linting)
+      - name: Run ESLint
+        run: npm run lint
+
+      # Step 5: Run Prettier (formatting check)
+      # - name: Check Prettier formatting
+      #   run: npm run format -- --check
+
+      # Step 6: Run TypeScript Type Checking
+      - name: Run TypeScript type check
+        run: npm run typecheck
+
+      # Step 7: Run Unit Tests with Vitest
+      # - name: Run tests
+      #   run: npm test
