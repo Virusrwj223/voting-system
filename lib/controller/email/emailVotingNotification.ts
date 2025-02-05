@@ -50,7 +50,9 @@ export const emailVotingNotification = async (req: NextRequest) => {
       [email],
       "You are eligible to vote",
       `
-            <p>Click here to authenticate vote. Magic voting link will expire in 1 minute after being sent.</p>
+            <p>Click here to verify email. Verification link valid for 2 days.</p>
+            </br>
+            <p>Voting link sent after verification is valid for 1 minute.</p>
             <a href="${notificationLink}" 
                style="display: inline-block; 
                       padding: 12px 20px; 
@@ -61,7 +63,7 @@ export const emailVotingNotification = async (req: NextRequest) => {
                       font-size: 16px; 
                       font-family: Arial, sans-serif; 
                       text-align: center;">
-                SEND MAGIC VOTING LINK
+                VERIFY EMAIL
             </a>
           `
     );
