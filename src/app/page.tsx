@@ -11,8 +11,10 @@ export default function Home() {
 
   return (
     <div className="relative w-full h-screen flex items-center justify-center bg-black">
+      {/* Exhaust Smoke Effect */}
       {isVisible && <div className="exhaust-smoke"></div>}
 
+      {/* Welcome Text */}
       <h1 className="text-white text-4xl font-bold fade-in">
         Welcome to the Voting System
       </h1>
@@ -20,33 +22,33 @@ export default function Home() {
       <style jsx>{`
         .exhaust-smoke {
           position: absolute;
-          bottom: 10px;
+          top: 50%;
           left: 50%;
-          transform: translateX(-50%);
-          width: 80px;
-          height: 80px;
+          transform: translate(-50%, -50%);
+          width: 50%;
+          height: 50%;
           background: radial-gradient(
             circle,
-            rgba(0, 150, 255, 0.8),
+            rgba(0, 150, 255, 0.7),
             rgba(0, 150, 255, 0.1)
           );
           animation: exhaust 3s ease-out forwards;
           border-radius: 50%;
-          filter: blur(20px);
+          filter: blur(50px);
         }
 
         @keyframes exhaust {
           0% {
             opacity: 1;
-            transform: translateY(0) scale(0.6);
+            transform: translate(-50%, -50%) scale(0.6);
           }
           50% {
             opacity: 0.5;
-            transform: translateY(-50px) scale(1.1);
+            transform: translate(-50%, -60%) scale(1.3);
           }
           100% {
             opacity: 0;
-            transform: translateY(-100px) scale(1.5);
+            transform: translate(-50%, -70%) scale(1.8);
           }
         }
 
