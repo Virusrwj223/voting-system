@@ -69,7 +69,7 @@ export async function emailMagicLink(req: NextRequest) {
       [email],
       "Your Magic Login Link",
       `
-      <p>Click and confirm that you want to vote. This link will expire in two hours.</p>
+      <p>Click and confirm that you want to vote. Voting link will expire in 1 minute.</p>
       <a href="${magicLink}" 
          style="display: inline-block; 
                 padding: 12px 20px; 
@@ -80,7 +80,7 @@ export async function emailMagicLink(req: NextRequest) {
                 font-size: 16px; 
                 font-family: Arial, sans-serif; 
                 text-align: center;">
-          AUTHENTICATE VOTE
+          ACCESS VOTE
       </a>
       `
     );
