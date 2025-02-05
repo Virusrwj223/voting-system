@@ -44,18 +44,18 @@ Start the backend server with the following command:
 pnpm run dev
 ```
 
-The server will start running at `http://localhost:3010`.
+The server will start running at `http://localhost:3000`.
 
 ---
 
 ### Step 3: Update Emails
 
-Update the `emails.txt` file in the project root directory. Each line in this file should contain an email address and a corresponding customer ID, separated by a space. For example:
+Update the `emails.txt` file in the project `scripts` directory. Each line in this file should contain an email address and a corresponding customer ID, separated by a space. For example:
 
 ```txt
-user1@example.com 1
-user2@example.com 2
-user3@example.com 3
+user1@example.com bdfevff
+user2@example.com ergrewg
+user3@example.com dgrgfee
 ```
 
 ---
@@ -67,17 +67,17 @@ Open another terminal window and run the appropriate script for your operating s
 For Mac/Linux:
 
 ```bash
-./sendEmail.sh
+./scripts/sendEmail.sh
 ```
 
 For Windows:
 
 ```cmd
-./sendEmail.bat
+./scripts/sendEmail.bat
 ```
 
 ```powershell
-./sendEmail.ps1
+./scripts/sendEmail.ps1
 ```
 
 Each script reads the `emails.txt` file, sends the magic links to the specified email addresses, and outputs a success message for each email sent.
