@@ -31,9 +31,7 @@ export default function Dashboard() {
         if (status == 403 && document.cookie) {
           const finalData = decodeURIComponent(document.cookie).split("=")[1];
           fetch(
-            `${
-              process.env.BASE_URL || "http://localhost:3000"
-            }/server/verify/verify-user-access?data=${finalData}`
+            `${"https://voting-system-gilt.vercel.app"}/server/verify/verify-user-access?data=${finalData}`
           )
             .then(async (res) => {
               setStatuscode(res.status); // Update the status code
