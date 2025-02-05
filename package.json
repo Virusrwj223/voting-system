@@ -23,6 +23,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "resend": "^4.1.2",
+    "sharp": "^0.33.5",
     "vitest": "^3.0.5",
     "vitest-mock-extended": "^2.0.2"
   },
