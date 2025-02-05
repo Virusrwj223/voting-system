@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Magic Link Voter Authentication System
 
-## Getting Started
+This project implements a **Magic Link** authentication system to securely verify voter identities before they access a voting form. The system ensures that only intended recipients can access and fill out the form by sending unique, time-sensitive magic links via email.
 
-First, run the development server:
+---
+
+## Setup Instructions
+
+### Prerequisites
+
+1. Ensure you have **pnpm** installed on your system. You can install it by following the instructions on the [pnpm website](https://pnpm.io/installation).
+2. Install **Node.js** (if not already installed), as pnpm depends on it.
+3. Clone the repository into your specifiec directory and `cd` into the directory.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Virusrwj223/magicLink.git
+cd magicLink
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Step 1: Install Dependencies
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+After cloning the repository, navigate to the project directory and run the following command to install all required dependencies:
 
-## Learn More
+```bash
+pnpm i
+```
 
-To learn more about Next.js, take a look at the following resources:
+Set up prisma
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+cd src/db
+prisma generate
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+### Step 2: Run the Backend Server
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Start the backend server with the following command:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm run dev
+```
+
+The server will start running at `http://localhost:3010`.
+
+---
+
+### Step 3: Update Emails
+
+Update the `emails.txt` file in the project root directory. Each line in this file should contain an email address and a corresponding customer ID, separated by a space. For example:
+
+```txt
+user1@example.com 1
+user2@example.com 2
+user3@example.com 3
+```
+
+---
+
+### Step 4: Send Emails
+
+Open another terminal window and run the appropriate script for your operating system to send the magic links to the listed email addresses:
+
+For Mac/Linux:
+
+```bash
+./sendEmail.sh
+```
+
+For Windows:
+
+```cmd
+./sendEmail.bat
+```
+
+```powershell
+./sendEmail.ps1
+```
+
+Each script reads the `emails.txt` file, sends the magic links to the specified email addresses, and outputs a success message for each email sent.
