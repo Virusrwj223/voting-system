@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { Unplug } from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Unplug } from "lucide-react";
 
 export default function Dashboard() {
   const [statuscode, setStatuscode] = useState(300); // Start with null to differentiate initial render
-  const [email, setEmail] = useState('');
-  const [customerid, setCustomerid] = useState('');
+  const [email, setEmail] = useState("");
+  const [customerid, setCustomerid] = useState("");
   const searchParams = useSearchParams();
-  const data = searchParams.get('data');
+  const data = searchParams.get("data");
 
   useEffect(() => {
     // Fetch the status
     fetch(
-      `${process.env.BASE_URL || 'http://localhost:3000'}/server/verify/verify-user-access?data=${data}`,
+      `${"https://voting-system-gilt.vercel.app"}/server/verify/verify-user-access?data=${data}`
     )
       .then(async (res) => {
         setStatuscode(res.status); // Update the status code
@@ -29,9 +29,11 @@ export default function Dashboard() {
       })
       .then(async (status) => {
         if (status == 403 && document.cookie) {
-          const finalData = decodeURIComponent(document.cookie).split('=')[1];
+          const finalData = decodeURIComponent(document.cookie).split("=")[1];
           fetch(
-            `${process.env.BASE_URL || 'http://localhost:3000'}/server/verify/verify-user-access?data=${finalData}`,
+            `${
+              process.env.BASE_URL || "http://localhost:3000"
+            }/server/verify/verify-user-access?data=${finalData}`
           )
             .then(async (res) => {
               setStatuscode(res.status); // Update the status code
@@ -44,13 +46,13 @@ export default function Dashboard() {
               setCustomerid(resObject.customerid);
             })
             .catch((err) => {
-              console.error('Error fetching status:', err);
+              console.error("Error fetching status:", err);
               setStatuscode(500); // Set status to 500 in case of an error
             });
         }
       })
       .catch((err) => {
-        console.error('Error fetching status:', err);
+        console.error("Error fetching status:", err);
         setStatuscode(500); // Set status to 500 in case of an error
       });
   }, [data]); // Ensure dependencies are added
@@ -63,22 +65,22 @@ export default function Dashboard() {
     const session = encodeURIComponent(data);
     document.cookie = `jwt=${session}; expires=${expires}; path=/; Secure; SameSite=Lax`;
     return (
-      <div style={{ display: 'flex', width: '100vw', height: '100vh' }}>
+      <div style={{ display: "flex", width: "100vw", height: "100vh" }}>
         <iframe
           title="dashboard"
           src={`https://prod-10.southeastasia.logic.azure.com/workflows/cbb2608e6fc044f89d8884513dd554d3/triggers/manual/paths/invoke/id/${customerid}?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=3Cn017IZF3aOJKXx5POG-VHmmk7iyBrgjYI3Ijj8b2E`}
-          style={{ flex: 1, border: 'none' }}
+          style={{ flex: 1, border: "none" }}
           allowFullScreen
         ></iframe>
       </div>
     );
   } else if (statuscode == 403 && document.cookie) {
     return (
-      <div style={{ display: 'flex', width: '100vw', height: '100vh' }}>
+      <div style={{ display: "flex", width: "100vw", height: "100vh" }}>
         <iframe
           title="cachedDashboard"
           src={`https://prod-10.southeastasia.logic.azure.com/workflows/cbb2608e6fc044f89d8884513dd554d3/triggers/manual/paths/invoke/id/${customerid}?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=3Cn017IZF3aOJKXx5POG-VHmmk7iyBrgjYI3Ijj8b2E`}
-          style={{ flex: 1, border: 'none' }}
+          style={{ flex: 1, border: "none" }}
           allowFullScreen
         ></iframe>
       </div>
