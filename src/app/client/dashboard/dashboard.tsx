@@ -3,6 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Unplug } from "lucide-react";
+import dotenv from "dotenv";
+
+const env = process.env.NODE_ENV || "development";
+dotenv.config({ path: `.env.${env}` });
 
 export default function Dashboard() {
   const [statuscode, setStatuscode] = useState(300); // Start with null to differentiate initial render
@@ -14,7 +18,9 @@ export default function Dashboard() {
   useEffect(() => {
     // Fetch the status
     fetch(
-      `${"https://voting-system-gilt.vercel.app"}/server/verify/verify-user-access?data=${data}`
+      `${
+        process.env.BASE_URL || "https://voting-system-gilt.vercel.app/"
+      }/server/verify/verify-user-access?data=${data}`
     )
       .then(async (res) => {
         setStatuscode(res.status); // Update the status code
@@ -31,7 +37,9 @@ export default function Dashboard() {
         if (status == 403 && document.cookie) {
           const finalData = decodeURIComponent(document.cookie).split("=")[1];
           fetch(
-            `${"https://voting-system-gilt.vercel.app"}/server/verify/verify-user-access?data=${finalData}`
+            `${
+              process.env.BASE_URL || "http://localhost:3000"
+            }/server/verify/verify-user-access?data=${finalData}`
           )
             .then(async (res) => {
               setStatuscode(res.status); // Update the status code
