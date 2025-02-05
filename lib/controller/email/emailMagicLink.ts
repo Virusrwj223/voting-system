@@ -88,7 +88,7 @@ export async function emailMagicLink(req: NextRequest) {
     // Redirect to the frontend's confirmation page
     const redirectUrl = `${
       process.env.BASE_URL || "http://localhost:3000"
-    }/client/emailSent`;
+    }/client/emailsent`;
     return NextResponse.redirect(redirectUrl);
   } catch (error) {
     return triErrorHandler(error);
