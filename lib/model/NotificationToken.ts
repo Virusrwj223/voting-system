@@ -47,10 +47,9 @@ class NotificationToken {
       notificatioObj == null ||
       notificatioObj.notificationexpiration < new Date(Date.now())
     )
-      throw new Error();
+      return null;
     const email = notificatioObj.email;
     const userObj = await prisma.user.findUnique({ where: { email: email } });
-    if (userObj == null) throw new Error();
     return userObj;
   }
 
