@@ -38,6 +38,12 @@ export async function emailMagicLink(req: NextRequest) {
     // Get user based on the notification token
     const notificationTokenObj = await NotificationToken.of(notificationtoken);
     const user = await notificationTokenObj.getUser();
+    if (user == null) {
+      const redirectUrl = `${
+        process.env.BASE_URL || "http://localhost:3000"
+      }/client/invalidpage`;
+      return NextResponse.redirect(redirectUrl);
+    }
     const email = user.email;
     const customerid = user.customerid;
 

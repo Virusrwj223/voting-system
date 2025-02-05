@@ -36,7 +36,13 @@ export async function verifyMagicLink(req: NextRequest) {
 
     // Validate the token integrity
     const tokenObj = await Token.of(token);
-    await tokenObj.checkTokenIntegrity(email);
+    const verifyToken = await tokenObj.checkTokenIntegrity(email);
+    if (verifyToken == null) {
+      const redirectUrl = `${
+        process.env.BASE_URL || "http://localhost:3000"
+      }/client/invalidpage`;
+      return NextResponse.redirect(redirectUrl);
+    }
 
     //encrypt data to be sent
     const payload: IMinimaUserIdentifier = {

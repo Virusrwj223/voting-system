@@ -19,7 +19,7 @@ export default function Dashboard() {
     // Fetch the status
     fetch(
       `${
-        process.env.BASE_URL || "https://voting-system-gilt.vercel.app/"
+        process.env.BASE_URL || "http://localhost:3000"
       }/server/verify/verify-user-access?data=${data}`
     )
       .then(async (res) => {

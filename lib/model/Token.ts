@@ -74,15 +74,16 @@ class Token {
     const tokenData = await prisma.magicLinkToken.findUnique({
       where: { email: email },
     });
-    if (!tokenData) throw new Error();
+    if (!tokenData) return null;
     if (
       !tokenData ||
       tokenData.expiration < new Date(Date.now()) || // Check expiration
       !(await bcrypt.compare(this.token, tokenData.token)) // Validate token hash
     ) {
-      throw new Error();
+      return null;
     }
     await this.invalidateToken(email);
+    return "200";
   }
 
   /**
