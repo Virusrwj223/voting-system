@@ -39,5 +39,5 @@ jobs:
         run: npm run typecheck
 
       # Step 7: Run Unit Tests with Vitest
-      # - name: Run tests
-      #   run: npm test
+      - name: Run tests
+        run: npm test
