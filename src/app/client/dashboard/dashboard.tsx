@@ -19,7 +19,7 @@ export default function Dashboard() {
     // Fetch the status
     fetch(
       `${
-        process.env.BASE_URL || "http://localhost:3000"
+        process.env.BASE_URL || "https://voting-system-gilt.vercel.app"
       }/server/verify/verify-user-access?data=${data}`
     )
       .then(async (res) => {
@@ -38,7 +38,7 @@ export default function Dashboard() {
           const finalData = decodeURIComponent(document.cookie).split("=")[1];
           fetch(
             `${
-              process.env.BASE_URL || "http://localhost:3000"
+              process.env.BASE_URL || "https://voting-system-gilt.vercel.app"
             }/server/verify/verify-user-access?data=${finalData}`
           )
             .then(async (res) => {
